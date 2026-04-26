@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,900&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-gold: #D4AF37;
+  --color-surface: #121212;
+  --color-app-bg: #080808;
+  --color-ink: #EAEAEA;
+  --color-muted: #888;
+  --color-line: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-app-bg text-ink font-sans;
+  }
+}
+
+@layer components {
+  .editorial-title {
+    @apply font-serif italic leading-[0.9];
+  }
+
+  .meta-badge {
+    @apply text-[10px] uppercase tracking-[2px] border border-gold px-2 py-1 text-gold inline-block;
+  }
+
+  .addon-tag {
+    @apply bg-black/80 backdrop-blur-sm px-1.5 py-0.5 text-[9px] rounded-sm text-gold border border-gold/30;
+  }
+}

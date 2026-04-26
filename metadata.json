@@ -1,0 +1,6 @@
+{
+  "name": "Lumina Reader",
+  "description": "A polished book and manga platform supporting external addons, metadata enrichment, and cross-format reading.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
