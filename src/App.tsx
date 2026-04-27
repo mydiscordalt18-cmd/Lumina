@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search as SearchIcon, Settings, Home, Heart, Music, Menu, X } from 'lucide-react';
@@ -26,7 +26,6 @@ const queryClient = new QueryClient({
 
 function Navigation() {
   const location = useLocation();
-  const { addons } = useReaderStore();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -41,27 +40,27 @@ function Navigation() {
     <>
       {/* Floating Navigation */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <div className="glass-card px-6 py-3">
-          <div className="flex items-center gap-8">
+        <div className="glass-card px-8 py-4">
+          <div className="flex items-center gap-12">
             {/* Logo */}
-            <Link to="/" className="text-xl font-bold text-gradient tracking-tight">
-              RESONANCE
+            <Link to="/" className="text-2xl font-bold text-gradient tracking-tight">
+              UtaVerse
             </Link>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-2">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   className={cn(
-                    "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                    "flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300",
                     location.pathname === item.path 
-                      ? "text-primary bg-primary/10 neon-glow" 
+                      ? "text-primary bg-primary/10" 
                       : "text-text-muted hover:text-text hover:bg-surface"
                   )}
                 >
-                  <item.icon className="w-4 h-4" />
+                  <item.icon className="w-5 h-5" />
                   {item.name}
                 </Link>
               ))}
@@ -103,7 +102,7 @@ function Navigation() {
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300",
                       location.pathname === item.path 
-                        ? "text-primary bg-primary/10 neon-glow" 
+                        ? "text-primary bg-primary/10" 
                         : "text-text-muted hover:text-text hover:bg-surface"
                     )}
                   >
@@ -116,21 +115,6 @@ function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Connection Status */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <div className="glass-card px-4 py-2">
-          <div className="flex items-center gap-2 text-sm">
-            <div className={cn(
-              "w-2 h-2 rounded-full",
-              addons.length > 0 ? "bg-primary neon-glow" : "bg-text-muted"
-            )} />
-            <span className="text-text-muted font-mono">
-              {addons.length} {addons.length === 1 ? 'source' : 'sources'}
-            </span>
-          </div>
-        </div>
-      </div>
     </>
   );
 }
@@ -138,7 +122,7 @@ function Navigation() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/Lumina">
         <div className="min-h-screen bg-app-bg text-text font-sans">
           <Navigation />
           
@@ -153,6 +137,7 @@ export default function App() {
                   <Route path="/reader" element={<ReaderPage />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="/library" element={<LibraryPage />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </AnimatePresence>
             </div>

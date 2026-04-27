@@ -24,7 +24,7 @@ export default function LandingPage() {
         >
           <div className="inline-flex items-center gap-2 glass-card px-4 py-2 text-sm text-text-muted">
             <Sparkles className="w-4 h-4 text-primary" />
-            Where stories find their frequency
+            Your Media Universe
           </div>
           <h1 className="text-6xl md:text-8xl font-bold text-gradient leading-tight">
             Discover
@@ -44,7 +44,7 @@ export default function LandingPage() {
         >
           <Link
             to="/search"
-            className="glass-button px-8 py-4 text-primary font-semibold hover:neon-glow transition-all duration-300 flex items-center gap-2"
+            className="glass-button px-8 py-4 text-primary font-semibold hover:bg-primary/10 transition-all duration-300 flex items-center gap-2"
           >
             <Play className="w-5 h-5" />
             Start Exploring
@@ -79,7 +79,7 @@ export default function LandingPage() {
             </div>
             <Link
               to="/settings"
-              className="inline-flex items-center gap-2 glass-button px-6 py-3 text-primary font-medium hover:neon-glow transition-all duration-300"
+              className="inline-flex items-center gap-2 glass-button px-6 py-3 text-primary font-medium hover:bg-primary/10 transition-all duration-300"
             >
               Add Sources
               <ArrowRight className="w-4 h-4" />
@@ -142,7 +142,7 @@ function ContentCard({ item, type }: { item: any; type: 'book' | 'music' }) {
     <Link to={linkTo} className="group">
       <motion.div
         whileHover={{ y: -4 }}
-        className="glass-card p-6 space-y-4 group-hover:neon-glow transition-all duration-300"
+        className="glass-card p-6 space-y-4 group-hover:shadow-2xl transition-all duration-300"
       >
         <div className="aspect-square bg-surface rounded-xl overflow-hidden relative">
           {item.cover || item.artworkURL ? (

@@ -155,7 +155,7 @@ export default function MusicPlayer() {
                 onClick={() => toggleMusicFavorite(currentTrack)}
                 className={cn(
                   "glass-button p-3 transition-all duration-300",
-                  isMusicFavorite(currentTrack.id) ? "text-primary neon-glow" : "text-text-muted hover:text-text"
+                  isMusicFavorite(currentTrack.id) ? "text-primary" : "text-text-muted hover:text-text"
                 )}
               >
                 <Heart className={cn("w-5 h-5", isMusicFavorite(currentTrack.id) && "fill-current")} />
@@ -174,7 +174,7 @@ export default function MusicPlayer() {
               
               <button
                 onClick={handlePlayPause}
-                className="glass-button p-4 text-primary hover:neon-glow transition-all duration-300"
+                className="glass-button p-4 text-primary hover:bg-primary/10 transition-all duration-300"
               >
                 {isPlaying ? (
                   <Pause className="w-6 h-6" />
