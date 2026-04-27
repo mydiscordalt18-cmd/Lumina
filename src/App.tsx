@@ -1,3 +1,4 @@
+// UtaVerse v1.5.2 - Music Search Interface Update
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
