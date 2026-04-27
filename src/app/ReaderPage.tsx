@@ -219,7 +219,7 @@ export default function ReaderPage() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between border-b border-line pb-6">
-                <h3 className="editorial-title text-3xl italic text-ink">Navigation & Visuals</h3>
+                <h3 className="text-3xl font-bold text-text">Reader Settings</h3>
                 <button onClick={() => setSettingsOpen(false)} className="text-muted hover:text-white transition-colors">
                   <X className="w-5 h-5" />
                 </button>

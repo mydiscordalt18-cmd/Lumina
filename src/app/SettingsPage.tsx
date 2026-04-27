@@ -41,7 +41,7 @@ export default function SettingsPage() {
       className="max-w-3xl mx-auto space-y-12"
     >
       <div className="space-y-2 border-b border-line pb-8">
-        <h1 className="editorial-title text-4xl">Addons</h1>
+        <h1 className="text-4xl font-bold">Sources</h1>
         <p className="text-text-muted text-sm">Add and manage your book sources</p>
       </div>
 
@@ -79,7 +79,7 @@ export default function SettingsPage() {
       </div>
 
       <div className="space-y-6">
-        <h2 className="editorial-title text-3xl italic">Installed Addons</h2>
+        <h2 className="text-3xl font-bold">Installed Sources</h2>
         {addons.length === 0 ? (
           <div className="text-center py-20 bg-surface border border-dashed border-line rounded-sm">
             <p className="text-text-muted text-sm">No sources added yet</p>

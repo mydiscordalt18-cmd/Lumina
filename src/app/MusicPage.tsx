@@ -83,7 +83,7 @@ export default function MusicPage() {
       className="space-y-10"
     >
       <div className="space-y-2">
-        <h1 className="editorial-title text-4xl italic">Music Library</h1>
+        <h1 className="text-4xl font-bold">Music</h1>
         <p className="text-text-muted text-sm">
           Searching {musicAddons.length} music sources
         </p>
@@ -143,7 +143,7 @@ export default function MusicPage() {
           <div className="min-h-[400px]">
             {!debouncedQuery ? (
               <div className="text-center py-32 space-y-4">
-                <h2 className="editorial-title text-3xl opacity-20">Discover Music</h2>
+                <h2 className="text-3xl font-bold opacity-20">Discover Music</h2>
                 <p className="text-text-muted text-base">Search for tracks, albums, and artists</p>
               </div>
             ) : (
