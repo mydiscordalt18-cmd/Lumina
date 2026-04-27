@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'motion/react';
-import { Book, Library, Search as SearchIcon, Settings, History, Home, Heart, Menu, X } from 'lucide-react';
+import { Book, Library, Search as SearchIcon, Settings, History, Home, Heart, Menu, X, Music } from 'lucide-react';
 import { cn } from './lib/utils';
 import { useReaderStore } from './store/useReaderStore';
 
@@ -12,6 +12,8 @@ import SearchPage from './app/SearchPage';
 import ReaderPage from './app/ReaderPage';
 import SettingsPage from './app/SettingsPage';
 import LibraryPage from './app/LibraryPage';
+import MusicPage from './app/MusicPage';
+import MusicPlayer from './components/MusicPlayer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +31,7 @@ function Navigation() {
   const navItems = [
     { name: 'Discover', path: '/', icon: Home },
     { name: 'Search', path: '/search', icon: SearchIcon },
+    { name: 'Music', path: '/music', icon: Music },
     { name: 'My Collection', path: '/library', icon: Heart },
     { name: 'Settings', path: '/settings', icon: Settings },
   ];
@@ -128,6 +131,7 @@ export default function App() {
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/search" element={<SearchPage />} />
+                  <Route path="/music" element={<MusicPage />} />
                   <Route path="/reader" element={<ReaderPage />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="/library" element={<LibraryPage />} />
@@ -135,6 +139,9 @@ export default function App() {
               </AnimatePresence>
             </div>
           </main>
+          
+          {/* Music Player */}
+          <MusicPlayer />
         </div>
       </BrowserRouter>
     </QueryClientProvider>

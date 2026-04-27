@@ -18,6 +18,12 @@ export default function SettingsPage() {
     try {
       const cleanUrl = url.replace(/\/$/, '');
       const manifest = await AddonService.fetchManifest(cleanUrl);
+      
+      // Validate addon type
+      if (!manifest.contentType) {
+        manifest.contentType = 'reading'; // Default for backward compatibility
+      }
+      
       addAddon(manifest);
       setUrl('');
     } catch (err) {
@@ -94,7 +100,19 @@ export default function SettingsPage() {
                     )}
                   </div>
                   <div>
-                    <h3 className="font-bold text-ink text-sm tracking-tight">{addon.name}</h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-bold text-ink text-sm tracking-tight">{addon.name}</h3>
+                      {addon.contentType === 'music' && (
+                        <span className="addon-tag bg-purple-500/20 border-purple-500/30 text-purple-400">
+                          MUSIC
+                        </span>
+                      )}
+                      {(addon.contentType === 'reading' || !addon.contentType) && (
+                        <span className="addon-tag">
+                          BOOKS
+                        </span>
+                      )}
+                    </div>
                     <p className="text-[10px] text-muted font-mono mt-1 opacity-50">{addon.baseURL}</p>
                     <div className="flex gap-2 mt-3">
                       {addon.resources.map(res => (
@@ -122,11 +140,15 @@ export default function SettingsPage() {
           <CheckCircle className="w-4 h-4" />
           Addon Setup
         </div>
-        <p className="text-[12px] text-muted leading-relaxed font-light">
-          Lumina Reader supports external addons. 
-          Sources must provide a <code>../manifest.json</code> file and 
-          search endpoints to work.
-        </p>
+        <div className="space-y-3 text-[12px] text-muted leading-relaxed font-light">
+          <p>
+            Lumina Reader supports both reading and music addons:
+          </p>
+          <ul className="list-disc list-inside space-y-1 ml-4">
+            <li><strong>Reading addons:</strong> Provide books and manga with <code>/manifest.json</code> and search endpoints</li>
+            <li><strong>Music addons:</strong> Follow Eclipse Music protocol with <code>/stream</code> endpoints for audio playback</li>
+          </ul>
+        </div>
       </div>
     </motion.div>
   );
