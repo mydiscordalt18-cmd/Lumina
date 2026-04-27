@@ -127,7 +127,7 @@ export default function App() {
           <Navigation />
           
           {/* Main Content */}
-          <main className="pt-24 pb-32">
+          <main className="pt-32 pb-32">
             <div className="max-w-7xl mx-auto px-6">
               <AnimatePresence mode="wait">
                 <Routes>

@@ -65,7 +65,7 @@ export default function SearchPage() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-8"
+      className="space-y-12"
     >
       {/* Search Input */}
       <div className="relative group max-w-3xl mx-auto">
@@ -85,7 +85,7 @@ export default function SearchPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide max-w-3xl mx-auto">
         {categories.map((cat) => (
           <button
             key={cat.id}
