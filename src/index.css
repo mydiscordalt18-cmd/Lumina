@@ -43,4 +43,8 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
+
+  .content-tag {
+    @apply bg-surface px-3 py-1 text-sm rounded-lg text-text-muted border border-border;
+  }
 }

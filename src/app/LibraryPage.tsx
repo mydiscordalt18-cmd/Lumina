@@ -15,14 +15,14 @@ export default function LibraryPage() {
     >
       <div className="space-y-2 border-b border-line pb-8">
         <h1 className="editorial-title text-5xl">Your Collection</h1>
-        <p className="text-muted text-xs uppercase tracking-[2px] font-mono">Curated Archives & Reading Logs</p>
+        <p className="text-text-muted text-sm">Your saved content and reading history</p>
       </div>
 
       {/* Favorites */}
       <section className="space-y-8">
         <div className="flex items-center justify-between">
           <h2 className="editorial-title text-3xl italic">Saved Artifacts</h2>
-          <span className="text-gold font-mono text-[10px] uppercase tracking-widest">{favorites.length} Items</span>
+          <span className="text-primary text-sm font-medium">{favorites.length} items</span>
         </div>
         
         {favorites.length === 0 ? (
@@ -55,7 +55,7 @@ export default function LibraryPage() {
                 </button>
                 <div className="mt-4">
                   <h3 className="font-bold text-ink text-sm line-clamp-1 group-hover:text-gold transition-colors">{item.title}</h3>
-                  <p className="text-[10px] text-muted italic mt-0.5">{item.author || 'Unknown'}</p>
+                  <p className="text-sm text-text-muted mt-0.5">{item.author || 'Unknown'}</p>
                 </div>
               </div>
             ))}
@@ -67,7 +67,7 @@ export default function LibraryPage() {
       <section className="space-y-8">
         <div className="flex items-center justify-between">
           <h2 className="editorial-title text-3xl italic">Temporal Logs</h2>
-          <span className="text-muted font-mono text-[10px] uppercase tracking-widest">{history.length} Logs Found</span>
+          <span className="text-text-muted text-sm font-medium">{history.length} items</span>
         </div>
 
         {history.length === 0 ? (
@@ -97,11 +97,11 @@ export default function LibraryPage() {
                     {item.title}
                   </h3>
                   <div className="flex items-center gap-4 mt-1">
-                    <span className="addon-tag opacity-60">
+                    <span className="content-tag opacity-60">
                       {item.type}
                     </span>
-                    <span className="text-[10px] text-muted font-mono uppercase tracking-widest">
-                      Recorded {new Date(item.timestamp).toLocaleDateString()}
+                    <span className="text-sm text-text-muted">
+                      {new Date(item.timestamp).toLocaleDateString()}
                     </span>
                   </div>
                 </div>

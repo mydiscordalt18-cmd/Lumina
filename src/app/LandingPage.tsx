@@ -159,7 +159,7 @@ function ContentCard({ item, type }: { item: any; type: 'book' | 'music' }) {
           
           <div className="absolute top-3 right-3">
             <div className="glass-card px-2 py-1">
-              <span className="text-xs font-mono text-text-muted uppercase">
+              <span className="text-sm text-text-muted">
                 {type}
               </span>
             </div>

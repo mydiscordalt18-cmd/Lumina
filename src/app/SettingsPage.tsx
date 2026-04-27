@@ -42,11 +42,11 @@ export default function SettingsPage() {
     >
       <div className="space-y-2 border-b border-line pb-8">
         <h1 className="editorial-title text-4xl">Addons</h1>
-        <p className="text-muted text-xs uppercase tracking-[2px] font-mono">Add and manage your book sources</p>
+        <p className="text-text-muted text-sm">Add and manage your book sources</p>
       </div>
 
       <div className="bg-surface rounded-sm border border-line p-8 space-y-6 shadow-2xl">
-        <h2 className="text-[10px] uppercase tracking-[3px] font-bold text-gold flex items-center gap-2">
+        <h2 className="text-sm font-semibold text-primary flex items-center gap-2">
           <Plus className="w-4 h-4" />
           Add new addon
         </h2>
@@ -65,13 +65,13 @@ export default function SettingsPage() {
           <button
             type="submit"
             disabled={loading}
-            className="px-10 py-4 bg-gold text-black text-xs font-bold uppercase tracking-[2px] hover:bg-gold/90 disabled:bg-muted disabled:cursor-not-allowed transition-all"
+            className="px-10 py-4 bg-gold text-black text-sm font-bold hover:bg-gold/90 disabled:bg-muted disabled:cursor-not-allowed transition-all"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Add'}
           </button>
         </form>
         {error && (
-          <div className="flex items-center gap-3 text-red-400 text-[10px] font-mono uppercase tracking-widest bg-red-400/5 p-4 border border-red-400/20">
+          <div className="flex items-center gap-3 text-red-400 text-sm bg-red-400/5 p-4 border border-red-400/20 rounded-xl">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>Connection failed. Please check the addon URL.</span>
           </div>
@@ -82,7 +82,7 @@ export default function SettingsPage() {
         <h2 className="editorial-title text-3xl italic">Installed Addons</h2>
         {addons.length === 0 ? (
           <div className="text-center py-20 bg-surface border border-dashed border-line rounded-sm">
-            <p className="text-muted font-mono text-[10px] uppercase tracking-widest">No addons yet</p>
+            <p className="text-text-muted text-sm">No sources added yet</p>
           </div>
         ) : (
           <div className="grid gap-3">
@@ -103,20 +103,20 @@ export default function SettingsPage() {
                     <div className="flex items-center gap-2">
                       <h3 className="font-bold text-ink text-sm tracking-tight">{addon.name}</h3>
                       {addon.contentType === 'music' && (
-                        <span className="addon-tag bg-purple-500/20 border-purple-500/30 text-purple-400">
-                          MUSIC
+                        <span className="content-tag bg-purple-500/20 border-purple-500/30 text-purple-400">
+                          Music
                         </span>
                       )}
                       {(addon.contentType === 'reading' || !addon.contentType) && (
-                        <span className="addon-tag">
-                          BOOKS
+                        <span className="content-tag">
+                          Books
                         </span>
                       )}
                     </div>
-                    <p className="text-[10px] text-muted font-mono mt-1 opacity-50">{addon.baseURL}</p>
+                    <p className="text-sm text-text-muted mt-1 opacity-70">{addon.baseURL}</p>
                     <div className="flex gap-2 mt-3">
                       {addon.resources.map(res => (
-                        <span key={res} className="addon-tag">
+                        <span key={res} className="content-tag">
                           {res}
                         </span>
                       ))}
@@ -136,7 +136,7 @@ export default function SettingsPage() {
       </div>
 
       <div className="bg-gold/[0.03] p-8 border border-gold/10 space-y-4">
-        <div className="flex items-center gap-3 text-gold text-[10px] font-bold uppercase tracking-[3px]">
+        <div className="flex items-center gap-3 text-primary text-sm font-semibold">
           <CheckCircle className="w-4 h-4" />
           Addon Setup
         </div>

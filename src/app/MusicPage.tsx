@@ -84,15 +84,15 @@ export default function MusicPage() {
     >
       <div className="space-y-2">
         <h1 className="editorial-title text-4xl italic">Music Library</h1>
-        <p className="text-muted text-xs uppercase tracking-[2px] font-mono">
-          Searching {musicAddons.length} music addons
+        <p className="text-text-muted text-sm">
+          Searching {musicAddons.length} music sources
         </p>
       </div>
 
       {musicAddons.length === 0 && (
         <div className="bg-surface border border-line rounded-sm p-8 text-center max-w-2xl mx-auto">
           <MusicIcon className="w-10 h-10 text-gold/20 mx-auto mb-4" />
-          <p className="text-gold font-mono text-xs uppercase tracking-widest">No Music Addons Connected</p>
+          <p className="text-primary text-sm font-semibold">No Music Sources Connected</p>
           <p className="text-muted text-sm mt-3 font-light">
             Add Eclipse Music addons to start streaming music.
           </p>
@@ -125,7 +125,7 @@ export default function MusicPage() {
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
                 className={cn(
-                  "flex items-center gap-2 pb-2 text-[11px] uppercase tracking-[2px] font-bold transition-all relative",
+                  "flex items-center gap-2 pb-2 text-sm font-medium transition-all relative",
                   activeTab === cat.id 
                     ? "text-gold after:content-[''] after:absolute after:bottom-[-1px] after:left-0 after:right-0 after:h-[1px] after:bg-gold" 
                     : "text-muted hover:text-ink"
@@ -133,7 +133,7 @@ export default function MusicPage() {
               >
                 {cat.name}
                 {results && results[cat.id]?.length > 0 && (
-                  <span className="text-[9px] text-muted opacity-50">({results[cat.id].length})</span>
+                  <span className="text-xs text-text-muted">({results[cat.id].length})</span>
                 )}
               </button>
             ))}
@@ -144,7 +144,7 @@ export default function MusicPage() {
             {!debouncedQuery ? (
               <div className="text-center py-32 space-y-4">
                 <h2 className="editorial-title text-3xl opacity-20">Discover Music</h2>
-                <p className="text-muted font-mono text-[10px] uppercase tracking-[2px]">Search for tracks, albums, and artists</p>
+                <p className="text-text-muted text-base">Search for tracks, albums, and artists</p>
               </div>
             ) : (
               <AnimatePresence mode="wait">
@@ -247,15 +247,15 @@ function TrackCard({ track, onPlay, isPlaying, isFavorite, onToggleFavorite }: {
         <h3 className="font-bold text-ink text-sm group-hover:text-gold transition-colors truncate">
           {track.title}
         </h3>
-        <p className="text-[10px] text-muted truncate">{track.artist}</p>
+        <p className="text-sm text-text-muted truncate">{track.artist}</p>
         {track.album && (
-          <p className="text-[10px] text-muted/60 truncate">{track.album}</p>
+          <p className="text-sm text-text-muted/60 truncate">{track.album}</p>
         )}
       </div>
       
       <div className="flex items-center gap-2">
         {track.duration && (
-          <span className="text-[10px] text-muted font-mono">
+          <span className="text-sm text-text-muted">
             {Math.floor(track.duration / 60)}:{(track.duration % 60).toString().padStart(2, '0')}
           </span>
         )}
@@ -288,17 +288,17 @@ function AlbumCard({ album }: { album: Album }) {
             <AlbumIcon className="w-8 h-8 text-muted/20" />
           </div>
         )}
-        <div className="addon-tag absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          ALBUM
+        <div className="content-tag absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          Album
         </div>
       </div>
       <div className="mt-4 space-y-1">
         <h3 className="font-bold text-ink text-sm group-hover:text-gold transition-colors line-clamp-1">
           {album.title}
         </h3>
-        <p className="text-[10px] text-muted italic line-clamp-1">{album.artist}</p>
+        <p className="text-sm text-text-muted line-clamp-1">{album.artist}</p>
         {album.year && (
-          <p className="text-[10px] text-muted/60">{album.year}</p>
+          <p className="text-sm text-text-muted/60">{album.year}</p>
         )}
       </div>
     </div>
@@ -326,7 +326,7 @@ function ArtistCard({ artist }: { artist: Artist }) {
           {artist.name}
         </h3>
         {artist.genres && artist.genres.length > 0 && (
-          <p className="text-[10px] text-muted italic line-clamp-1">{artist.genres.join(', ')}</p>
+          <p className="text-sm text-text-muted line-clamp-1">{artist.genres.join(', ')}</p>
         )}
       </div>
     </div>
@@ -348,17 +348,17 @@ function PlaylistCard({ playlist }: { playlist: Playlist }) {
             <ListMusic className="w-8 h-8 text-muted/20" />
           </div>
         )}
-        <div className="addon-tag absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          PLAYLIST
+        <div className="content-tag absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          Playlist
         </div>
       </div>
       <div className="mt-4 space-y-1">
         <h3 className="font-bold text-ink text-sm group-hover:text-gold transition-colors line-clamp-1">
           {playlist.title}
         </h3>
-        <p className="text-[10px] text-muted italic line-clamp-1">{playlist.creator}</p>
+        <p className="text-sm text-text-muted line-clamp-1">{playlist.creator}</p>
         {playlist.trackCount && (
-          <p className="text-[10px] text-muted/60">{playlist.trackCount} tracks</p>
+          <p className="text-sm text-text-muted/60">{playlist.trackCount} tracks</p>
         )}
       </div>
     </div>

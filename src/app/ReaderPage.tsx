@@ -142,7 +142,7 @@ export default function ReaderPage() {
               </button>
               <div className="max-w-[200px] md:max-w-md">
                 <h1 className="editorial-title text-xl text-white truncate italic">{content.title}</h1>
-                <p className="text-gold text-[10px] uppercase font-mono tracking-widest truncate">{content.author}</p>
+                <p className="text-primary text-sm font-medium truncate">{content.author}</p>
               </div>
             </div>
 
@@ -227,7 +227,7 @@ export default function ReaderPage() {
 
               {type === 'manga' && (
                 <div className="space-y-4">
-                  <p className="text-[10px] font-mono text-gold uppercase tracking-[3px]">Flow Mode</p>
+                  <p className="text-sm font-medium text-primary">Reading Mode</p>
                   <div className="grid grid-cols-2 gap-6">
                     <button 
                       onClick={() => setMangaMode('vertical')}
@@ -237,7 +237,7 @@ export default function ReaderPage() {
                       )}
                     >
                       <LayoutGrid className="w-5 h-5" />
-                      <span className="text-[10px] font-bold uppercase tracking-widest">Vertical</span>
+                      <span className="text-sm font-medium">Vertical</span>
                     </button>
                     <button 
                       onClick={() => setMangaMode('horizontal')}
@@ -247,7 +247,7 @@ export default function ReaderPage() {
                       )}
                     >
                       <Maximize2 className="w-5 h-5 rotate-90" />
-                      <span className="text-[10px] font-bold uppercase tracking-widest">Paging</span>
+                      <span className="text-sm font-medium">Horizontal</span>
                     </button>
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export default function ReaderPage() {
                     {content.coverURL && <img src={content.coverURL} className="w-full h-full object-cover grayscale-[0.3]" />}
                   </div>
                   <div className="space-y-3">
-                    <span className="meta-badge">Metadata Log</span>
+                    <span className="content-tag">Content Info</span>
                     <h4 className="font-bold text-ink text-lg leading-tight uppercase tracking-tighter">{content.title}</h4>
                     <p className="text-xs text-muted font-light leading-relaxed line-clamp-3 italic">
                       {content.description || 'Primary archive description missing.'}
@@ -268,7 +268,7 @@ export default function ReaderPage() {
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-line flex justify-between items-center text-[10px] font-mono text-muted uppercase tracking-widest">
+              <div className="pt-6 border-t border-line flex justify-between items-center text-sm text-text-muted">
                 <span>Node: {type} Provider</span>
                 <span>System: Enriched</span>
               </div>
