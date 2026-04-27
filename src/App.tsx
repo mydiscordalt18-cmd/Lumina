@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'motion/react';
-import { Book, Library, Search as SearchIcon, Settings, History, Home, Heart, Menu, X, Music } from 'lucide-react';
+import { Search as SearchIcon, Settings, Home, Heart, Music, Menu, X } from 'lucide-react';
 import { cn } from './lib/utils';
 import { useReaderStore } from './store/useReaderStore';
 
@@ -27,81 +27,110 @@ const queryClient = new QueryClient({
 function Navigation() {
   const location = useLocation();
   const { addons } = useReaderStore();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { name: 'Discover', path: '/', icon: Home },
     { name: 'Search', path: '/search', icon: SearchIcon },
     { name: 'Music', path: '/music', icon: Music },
-    { name: 'My Collection', path: '/library', icon: Heart },
+    { name: 'Library', path: '/library', icon: Heart },
     { name: 'Settings', path: '/settings', icon: Settings },
   ];
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-[240px] fixed top-0 left-0 bottom-0 bg-app-bg border-r border-line p-8 z-50">
-        <div className="font-serif italic text-3xl font-black mb-12 tracking-tighter">LUMINA</div>
-        
-        <nav className="flex-1 space-y-8">
-          <div>
-            <div className="text-[10px] uppercase tracking-[2px] text-muted mb-4">Library</div>
-            <div className="space-y-2">
+      {/* Floating Navigation */}
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="glass-card px-6 py-3">
+          <div className="flex items-center gap-8">
+            {/* Logo */}
+            <Link to="/" className="text-xl font-bold text-gradient tracking-tight">
+              RESONANCE
+            </Link>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   className={cn(
-                    "block py-2 text-[13px] tracking-wide transition-colors hover:text-gold",
-                    location.pathname === item.path ? "text-ink font-semibold" : "text-muted"
+                    "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                    location.pathname === item.path 
+                      ? "text-primary bg-primary/10 neon-glow" 
+                      : "text-text-muted hover:text-text hover:bg-surface"
                   )}
                 >
+                  <item.icon className="w-4 h-4" />
                   {item.name}
                 </Link>
               ))}
             </div>
-          </div>
 
-          {addons.length > 0 && (
-            <div>
-              <div className="text-[10px] uppercase tracking-[2px] text-muted mb-4">Addons</div>
-              <div className="space-y-2">
-                {addons.map(addon => (
-                  <div key={addon.id} className="text-[13px] text-muted line-clamp-1 py-1">
-                    {addon.name}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </nav>
-
-        <div className="pt-8 border-t border-line">
-          <div className="flex items-center gap-2 font-mono text-[10px] text-green-400">
-            <span className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-[0_0_8px_#4ade80]" />
-            {addons.length} Addons Ready
-          </div>
-          <p className="text-[10px] text-muted mt-2">v1.1.0</p>
-        </div>
-      </aside>
-
-      {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-t border-line shadow-2xl">
-        <div className="flex justify-around items-center h-16">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={cn(
-                "flex flex-col items-center gap-1 transition-colors",
-                location.pathname === item.path ? "text-gold" : "text-muted"
-              )}
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden glass-button p-2"
             >
-              <item.icon className="w-5 h-5" />
-              <span className="text-[10px] font-medium">{item.name.split(' ')[0]}</span>
-            </Link>
-          ))}
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </nav>
+
+      {/* Mobile Navigation Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 md:hidden"
+          >
+            <div className="absolute inset-0 bg-app-bg/80 backdrop-blur-xl" onClick={() => setIsOpen(false)} />
+            <motion.div
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -100, opacity: 0 }}
+              className="absolute top-20 left-4 right-4"
+            >
+              <div className="glass-card p-6 space-y-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300",
+                      location.pathname === item.path 
+                        ? "text-primary bg-primary/10 neon-glow" 
+                        : "text-text-muted hover:text-text hover:bg-surface"
+                    )}
+                  >
+                    <item.icon className="w-5 h-5" />
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Connection Status */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <div className="glass-card px-4 py-2">
+          <div className="flex items-center gap-2 text-sm">
+            <div className={cn(
+              "w-2 h-2 rounded-full",
+              addons.length > 0 ? "bg-primary neon-glow" : "bg-text-muted"
+            )} />
+            <span className="text-text-muted font-mono">
+              {addons.length} {addons.length === 1 ? 'source' : 'sources'}
+            </span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
@@ -110,23 +139,12 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="min-h-screen bg-app-bg text-ink font-sans selection:bg-gold/30">
+        <div className="min-h-screen bg-app-bg text-text font-sans">
           <Navigation />
-          <main className="md:ml-[240px] relative">
-            {/* Editorial Header (Desktop only or shared) */}
-            <header className="hidden md:flex h-20 border-b border-line items-center justify-between px-10 sticky top-0 bg-app-bg/80 backdrop-blur-md z-40">
-              <div className="flex items-center gap-4 text-xs font-mono text-muted uppercase tracking-[1px]">
-                 <span className="text-gold">Status:</span> Enriched & Connected
-              </div>
-              <div className="flex items-center gap-6">
-                <Link to="/search" className="flex items-center gap-2 text-xs font-mono text-muted hover:text-gold transition-colors italic">
-                  Search catalog...
-                </Link>
-                <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40" />
-              </div>
-            </header>
-
-            <div className="max-w-7xl mx-auto p-6 md:p-10 pb-24 md:pb-10">
+          
+          {/* Main Content */}
+          <main className="pt-24 pb-32">
+            <div className="max-w-7xl mx-auto px-6">
               <AnimatePresence mode="wait">
                 <Routes>
                   <Route path="/" element={<LandingPage />} />

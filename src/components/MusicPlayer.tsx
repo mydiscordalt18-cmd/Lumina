@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useReaderStore } from '../store/useReaderStore';
-import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Music, Heart, Shuffle, Repeat } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Music, Heart } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 export default function MusicPlayer() {
@@ -124,15 +124,15 @@ export default function MusicPlayer() {
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 100, opacity: 0 }}
-        className="fixed bottom-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-t border-line shadow-2xl"
+        className="fixed bottom-6 left-6 right-6 z-50"
       >
-        <audio ref={audioRef} preload="metadata" />
-        
-        <div className="max-w-7xl mx-auto p-4">
-          <div className="flex items-center gap-4">
+        <div className="glass-card p-6 nav-blur">
+          <audio ref={audioRef} preload="metadata" />
+          
+          <div className="flex items-center gap-6">
             {/* Track Info */}
-            <div className="flex items-center gap-3 min-w-0 flex-1">
-              <div className="w-12 h-12 rounded-sm bg-surface border border-line overflow-hidden flex-shrink-0">
+            <div className="flex items-center gap-4 min-w-0 flex-1">
+              <div className="w-14 h-14 rounded-xl bg-surface overflow-hidden shrink-0">
                 {currentTrack.artworkURL ? (
                   <img 
                     src={currentTrack.artworkURL} 
@@ -141,24 +141,24 @@ export default function MusicPlayer() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Music className="w-5 h-5 text-muted/20" />
+                    <Music className="w-6 h-6 text-text-muted" />
                   </div>
                 )}
               </div>
               
               <div className="min-w-0 flex-1">
-                <h3 className="font-bold text-ink text-sm truncate">{currentTrack.title}</h3>
-                <p className="text-[10px] text-muted truncate">{currentTrack.artist}</p>
+                <h3 className="font-semibold text-text truncate">{currentTrack.title}</h3>
+                <p className="text-sm text-text-muted truncate">{currentTrack.artist}</p>
               </div>
               
               <button
                 onClick={() => toggleMusicFavorite(currentTrack)}
                 className={cn(
-                  "p-2 transition-colors",
-                  isMusicFavorite(currentTrack.id) ? "text-gold" : "text-muted hover:text-gold"
+                  "glass-button p-3 transition-all duration-300",
+                  isMusicFavorite(currentTrack.id) ? "text-primary neon-glow" : "text-text-muted hover:text-text"
                 )}
               >
-                <Heart className={cn("w-4 h-4", isMusicFavorite(currentTrack.id) && "fill-current")} />
+                <Heart className={cn("w-5 h-5", isMusicFavorite(currentTrack.id) && "fill-current")} />
               </button>
             </div>
 
@@ -167,76 +167,76 @@ export default function MusicPlayer() {
               <button
                 onClick={playPrevious}
                 disabled={queueIndex <= 0}
-                className="p-2 text-muted hover:text-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                className="glass-button p-3 text-text-muted hover:text-text transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <SkipBack className="w-5 h-5" />
               </button>
               
               <button
                 onClick={handlePlayPause}
-                className="w-10 h-10 rounded-full bg-gold text-black flex items-center justify-center hover:bg-gold/90 transition-colors"
+                className="glass-button p-4 text-primary hover:neon-glow transition-all duration-300"
               >
                 {isPlaying ? (
-                  <Pause className="w-5 h-5" />
+                  <Pause className="w-6 h-6" />
                 ) : (
-                  <Play className="w-5 h-5 ml-0.5" />
+                  <Play className="w-6 h-6 ml-0.5" />
                 )}
               </button>
               
               <button
                 onClick={playNext}
                 disabled={queueIndex >= queue.length - 1}
-                className="p-2 text-muted hover:text-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                className="glass-button p-3 text-text-muted hover:text-text transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <SkipForward className="w-5 h-5" />
               </button>
             </div>
 
             {/* Progress */}
-            <div className="flex items-center gap-2 flex-1 max-w-md">
-              <span className="text-[10px] text-muted font-mono w-10 text-right">
+            <div className="flex items-center gap-3 flex-1 max-w-md">
+              <span className="text-xs text-text-muted font-mono w-12 text-right">
                 {formatTime(currentTime)}
               </span>
               
               <div 
-                className="flex-1 h-1 bg-surface rounded-full cursor-pointer group"
+                className="flex-1 h-2 bg-surface rounded-full cursor-pointer group overflow-hidden"
                 onClick={handleSeek}
               >
                 <div 
-                  className="h-full bg-gold rounded-full relative group-hover:bg-gold/80 transition-colors"
+                  className="h-full bg-gradient-to-r from-primary to-secondary rounded-full relative transition-all duration-300"
                   style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
                 >
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" />
                 </div>
               </div>
               
-              <span className="text-[10px] text-muted font-mono w-10">
+              <span className="text-xs text-text-muted font-mono w-12">
                 {formatTime(duration)}
               </span>
             </div>
 
             {/* Volume */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <button
                 onClick={toggleMute}
-                className="p-2 text-muted hover:text-gold transition-colors"
+                className="glass-button p-3 text-text-muted hover:text-text transition-colors"
               >
                 {isMuted || volume === 0 ? (
-                  <VolumeX className="w-4 h-4" />
+                  <VolumeX className="w-5 h-5" />
                 ) : (
-                  <Volume2 className="w-4 h-4" />
+                  <Volume2 className="w-5 h-5" />
                 )}
               </button>
               
               <div 
-                className="w-20 h-1 bg-surface rounded-full cursor-pointer group"
+                className="w-24 h-2 bg-surface rounded-full cursor-pointer group overflow-hidden"
                 onClick={handleVolumeChange}
               >
                 <div 
-                  className="h-full bg-gold rounded-full relative group-hover:bg-gold/80 transition-colors"
+                  className="h-full bg-gradient-to-r from-primary to-secondary rounded-full relative transition-all duration-300"
                   style={{ width: `${isMuted ? 0 : volume * 100}%` }}
                 >
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" />
                 </div>
               </div>
             </div>
