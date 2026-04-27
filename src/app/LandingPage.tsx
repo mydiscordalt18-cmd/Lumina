@@ -22,10 +22,6 @@ export default function LandingPage() {
           transition={{ delay: 0.2 }}
           className="space-y-4"
         >
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 text-sm text-text-muted">
-            <Sparkles className="w-4 h-4 text-primary" />
-            Your Media Universe
-          </div>
           <h1 className="text-6xl md:text-8xl font-bold text-gradient leading-tight">
             Discover
             <br />
